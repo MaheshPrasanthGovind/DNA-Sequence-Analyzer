@@ -1,6 +1,6 @@
 # DNA Sequence Analyzer
 
-You can find the main Python script [here](./dna_sequence_analyzer.py). It contains all the functions for:
+You can find the main Python script [here](./DNA_SEQUENCE_ANALYSIS.py). It contains all the functions for:
 
 - Validating DNA sequences
 - Calculating nucleotide frequencies and GC content
