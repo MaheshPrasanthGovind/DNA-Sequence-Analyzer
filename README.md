@@ -1,6 +1,6 @@
 # DNA Sequence Analyzer
 
-A Python tool for analyzing DNA sequences, including:
+You can find the main Python script [here](./dna_sequence_analyzer.py). It contains all the functions for:
 
 - Validating DNA sequences
 - Calculating nucleotide frequencies and GC content
