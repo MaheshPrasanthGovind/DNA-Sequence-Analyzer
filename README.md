@@ -31,4 +31,27 @@ cd dna-sequence-analyzer
 
 ▶️ [Run the script](DNA_SEQUENCE_ANALYSIS.py)
 
+## 🧬 What I Learned
+
+While building this project, I explored both **bioinformatics concepts** and **Python programming**.Both of these subjects will help civilization in the future. Here’s a summary of the key things I learned:
+
+### 🔹 Biology & Bioinformatics
+- **DNA structure and nucleotide basics**
+- **Transcription**
+- **Reverse complements**
+- **GC content**
+- **Protein translation**
+- **Open Reading Frames (ORFs)**
+- **Codon usage analysis**
+
+### 🔹 Programming & Tools
+- **Python scripting**
+- **BioPython**
+- **Matplotlib**
+- **FASTA file handling**
+- **Google Colab**
+- **GitHub**
+
+
+
 
