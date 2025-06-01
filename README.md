@@ -1,3 +1,5 @@
+##Important note: This code works mainly for google colab even if you dont have python installed just go to google drive and you can paste this code in colab.
+
 # DNA Sequence Analyzer
 
 You can find the main Python script [here](./DNA_SEQUENCE_ANALYSIS.py). It contains all the functions for:
