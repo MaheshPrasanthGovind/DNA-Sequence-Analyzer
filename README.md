@@ -1,4 +1,4 @@
-##Important note: This code works mainly for google colab even if you dont have python installed just go to google drive and you can paste this code in colab.
+##Important note: This code works mainly for Google Colaboratory, even if you dont have Python installed, just go to Google drive and you can paste this code in Google Colaboratory
 
 # DNA Sequence Analyzer
 
