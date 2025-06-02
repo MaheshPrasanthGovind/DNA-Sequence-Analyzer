@@ -1,5 +1,7 @@
 The app using this code is [App](https://dna-sequence-analyzer-jtfw9gugp75euqd7toaqhn.streamlit.app)
-# DNA Sequence Analyzer
+# 🧬 DNA Sequence Analyzer (Streamlit App)
+
+A web-based DNA analysis tool built using Python, BioPython, and Streamlit. It performs:
 
 You can find the main Python script [here](./DNA_SEQUENCE_ANALYSIS.py). It contains all the functions for:
 
@@ -52,6 +54,7 @@ While building this project, I explored both **bioinformatics concepts** and **P
 - **FASTA file handling**
 - **Google Colab**
 - **GitHub**
+- **Streamlit**
 
 
 
