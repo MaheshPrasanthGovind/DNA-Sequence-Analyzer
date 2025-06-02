@@ -79,6 +79,7 @@ def find_orfs(seq, min_length_bp=100):
 
 # --- Streamlit Interface ---
 st.title("🧬 DNA Sequence Analyzer")
+st.subheader("By Mahesh Prasanth Govind")
 st.markdown("Upload a **FASTA** file or paste a DNA sequence manually to begin analysis.")
 
 input_mode = st.radio("Input method:", ["Manual", "Upload FASTA"])
