@@ -80,6 +80,36 @@ def find_orfs(seq, min_length_bp=100):
 # --- Streamlit Interface ---
 st.title("🧬 DNA Sequence Analyzer")
 st.subheader("By Mahesh Prasanth Govind")
+
+st.markdown(
+    """
+    <style>
+    /* Set app background to black */
+    .stApp {
+        background-color: #000000;
+        color: #FFFFFF;
+    }
+
+    /* Main content containers */
+    .css-1d391kg, .css-1lcbmhc {
+        background-color: #000000;
+        color: #FFFFFF;
+    }
+
+    /* Sidebar background */
+    .css-1v3fvcr {
+        background-color: #000000;
+        color: #FFFFFF;
+    }
+
+    /* Text colors */
+    h1, h2, h3, h4, h5, h6, p, span, label {
+        color: #FFFFFF;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
 st.markdown("Upload a **FASTA** file or paste a DNA sequence manually to begin analysis.")
 
 input_mode = st.radio("Input method:", ["Manual", "Upload FASTA"])
