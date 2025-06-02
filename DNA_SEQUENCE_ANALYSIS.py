@@ -1,6 +1,6 @@
 import streamlit as st
 from Bio.Seq import Seq
-from Bio import SeqIO
+
 from collections import defaultdict
 import matplotlib.pyplot as plt
 import re
