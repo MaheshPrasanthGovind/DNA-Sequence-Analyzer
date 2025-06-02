@@ -1,4 +1,4 @@
-The app using this code is [App](https://dna-sequence-analyzer-jtfw9gugp75euqd7toaqhn.streamlit.app)
+The app using this code is [DNA Analyzer](https://dna-sequence-analyzer-jtfw9gugp75euqd7toaqhn.streamlit.app)
 # 🧬 DNA Sequence Analyzer (Streamlit App)
 
 A web-based DNA analysis tool built using Python, BioPython, and Streamlit. It performs:
