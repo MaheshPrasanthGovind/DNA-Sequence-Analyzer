@@ -26,9 +26,8 @@ You can find the main Python script [here](./DNA_SEQUENCE_ANALYSIS.py). It conta
 
 1. Clone this repository:
 
-```bash
+```
 git clone https://github.com/MaheshPrasanthGovind/dna-sequence-analyzer.git
-cd dna-sequence-analyzer
 ```
 ## Usage
 
