@@ -84,26 +84,39 @@ st.subheader("By Mahesh Prasanth Govind")
 st.markdown(
     """
     <style>
-    /* Set app background to black */
+    /* Entire app background */
     .stApp {
         background-color: #000000;
         color: #FFFFFF;
     }
 
-    /* Main content containers */
-    .css-1d391kg, .css-1lcbmhc {
-        background-color: #000000;
+    /* Headings and general text */
+    h1, h2, h3, h4, h5, h6, p, span, label, div {
         color: #FFFFFF;
     }
 
     /* Sidebar background */
     .css-1v3fvcr {
         background-color: #000000;
-        color: #FFFFFF;
     }
 
-    /* Text colors */
-    h1, h2, h3, h4, h5, h6, p, span, label {
+    /* Text input areas (manual entry) */
+    textarea, input[type="text"] {
+        background-color: #2b2b2b !important;
+        color: #FFFFFF !important;
+        border: 1px solid #555555 !important;
+    }
+
+    /* Optional: Button styling */
+    button {
+        background-color: #444444 !important;
+        color: #FFFFFF !important;
+        border: 1px solid #FFFFFF !important;
+    }
+
+    /* Optional: Dropdowns, sliders, etc. */
+    .css-1cpxqw2, .css-1r6slb0 {
+        background-color: #2b2b2b;
         color: #FFFFFF;
     }
     </style>
