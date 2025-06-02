@@ -1,5 +1,4 @@
-##Important note: This code works mainly for Google Colaboratory, even if you dont have Python installed, just go to Google drive and you can paste this code in Google Colaboratory
-
+The app using this code is [App](https://dna-sequence-analyzer-jtfw9gugp75euqd7toaqhn.streamlit.app)
 # DNA Sequence Analyzer
 
 You can find the main Python script [here](./DNA_SEQUENCE_ANALYSIS.py). It contains all the functions for:
