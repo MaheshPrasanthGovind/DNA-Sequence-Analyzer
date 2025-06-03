@@ -10,18 +10,20 @@ from io import StringIO
 def validate_dna(seq):
     return all(base in 'ATCG' for base in seq.upper())
 
+def sanitize_dna(seq):
+    return re.sub(r'[^ATCG]', '', seq.upper())
+
 def nucleotide_frequency(seq):
-    return {base: seq.upper().count(base) for base in 'ATCG'}
+    return {base: seq.count(base) for base in 'ATCG'}
 
 def gc_content(seq):
-    seq = seq.upper()
     if not seq:
         return 0.0
     gc = seq.count('G') + seq.count('C')
     return round((gc / len(seq)) * 100, 2)
 
 def transcribe(seq):
-    return seq.upper().replace("T", "U")
+    return seq.replace("T", "U")
 
 def reverse_complement(seq):
     return str(Seq(seq).reverse_complement())
@@ -35,8 +37,8 @@ def translate_sequence(seq):
 def codon_usage(seq):
     codon_table = defaultdict(int)
     for i in range(0, len(seq) - 2, 3):
-        codon = seq[i:i+3].upper()
-        if len(codon) == 3 and all(base in 'ATCG' for base in codon):
+        codon = seq[i:i+3]
+        if len(codon) == 3:
             codon_table[codon] += 1
     return dict(codon_table)
 
@@ -64,7 +66,7 @@ def find_orfs(seq, min_length_bp=100):
     orfs = []
     for strand_seq in [seq, reverse_complement(seq)]:
         for frame in range(3):
-            current_seq = Seq(strand_seq[frame:].upper())
+            current_seq = Seq(strand_seq[frame:])
             trans = str(current_seq.translate(to_stop=False))
             start = -1
             for i, aa in enumerate(trans):
@@ -78,72 +80,41 @@ def find_orfs(seq, min_length_bp=100):
     return orfs
 
 # --- Streamlit Interface ---
-st.title("🧬 DNA Sequence Analyzer")
-st.subheader("By Mahesh Prasanth Govind")
+st.set_page_config(page_title="DNA Sequence Analyzer", layout="wide")
 
-st.markdown(
-    """
+st.markdown("""
     <style>
-    /* Entire app background */
-    .stApp {
-        background-color: #000000;
-        color: #FFFFFF;
+    html, body, [class*="css"] {
+        background-color: #000000 !important;
+        color: #f0f0f0 !important;
     }
-
-    /* Headings and general text */
-    h1, h2, h3, h4, h5, h6, p, span, label, div {
-        color: #FFFFFF;
+    textarea, input {
+        background-color: #333333 !important;
+        color: #f0f0f0 !important;
     }
-
-    /* Sidebar background */
-    .css-1v3fvcr {
-        background-color: #000000;
-    }
-
-    /* Text input areas (manual entry) */
-    textarea, input[type="text"] {
-        background-color: #2b2b2b !important;
-        color: #FFFFFF !important;
-        border: 1px solid #555555 !important;
-    }
-
-    /* Output blocks like st.code, st.text, etc. */
-    .stCodeBlock, .stText, .stMarkdown, .element-container {
-        background-color: #2b2b2b !important;
-        color: #FFFFFF !important;
-        border-radius: 5px;
-        padding: 0.5rem;
-    }
-
-    /* Optional: Button styling */
-    button {
-        background-color: #444444 !important;
-        color: #FFFFFF !important;
-        border: 1px solid #FFFFFF !important;
-    }
-
-    /* Optional: Dropdowns, sliders, etc. */
-    .css-1cpxqw2, .css-1r6slb0 {
-        background-color: #2b2b2b;
-        color: #FFFFFF;
+    .stCodeBlock, .stMarkdown {
+        background-color: #2d2d2d !important;
+        color: #f0f0f0 !important;
     }
     </style>
-    """,
-    unsafe_allow_html=True,
-)
+""", unsafe_allow_html=True)
+
+st.title("🧬 DNA Sequence Analyzer")
+st.subheader("By Mahesh Prasanth Govind")
 
 st.markdown("Upload a **FASTA** file or paste a DNA sequence manually to begin analysis.")
 
 input_mode = st.radio("Input method:", ["Manual", "Upload FASTA"])
 
 if input_mode == "Manual":
-    seq_input = st.text_area("Enter your DNA sequence here (A, T, C, G):", height=200)
+    raw_seq = st.text_area("Enter your DNA sequence here (A, T, C, G):", height=200)
     seq_id = "Manual Input"
+    seq_input = sanitize_dna(raw_seq)
 
-    if seq_input:
+    if raw_seq:
         if not validate_dna(seq_input):
             st.warning("The input contains non-DNA characters. Results may be unreliable.")
-        
+
         st.subheader("Basic Analysis")
         st.write("**Length:**", len(seq_input))
         st.write("**Nucleotide Frequency:**", nucleotide_frequency(seq_input))
@@ -153,9 +124,12 @@ if input_mode == "Manual":
         st.write("**Translation (first 20 codons):**", translate_sequence(seq_input[:60]))
 
         st.subheader("Codon Usage")
-        codons = codon_usage(seq_input)
-        st.json(dict(list(codons.items())[:10]))  # Show first 10 codons
-        plot_codon_usage(codons, seq_id)
+        if len(seq_input) >= 6:
+            codons = codon_usage(seq_input)
+            st.json(dict(list(codons.items())[:10]))  # Show first 10
+            plot_codon_usage(codons, seq_id)
+        else:
+            st.warning("Sequence too short for codon usage analysis.")
 
         st.subheader("Start Codons (ATG)")
         atgs = find_motif(seq_input, "ATG")
@@ -178,8 +152,10 @@ elif input_mode == "Upload FASTA":
                 st.error("No sequences found in the uploaded FASTA file.")
             else:
                 for record in records:
-                    seq_str = str(record.seq)
+                    raw_seq = str(record.seq)
                     seq_id = record.id
+                    seq_str = sanitize_dna(raw_seq)
+
                     st.markdown(f"## 🔍 Analysis for: `{seq_id}`")
                     st.write("**Length:**", len(seq_str))
                     st.write("**Nucleotide Frequency:**", nucleotide_frequency(seq_str))
@@ -189,9 +165,12 @@ elif input_mode == "Upload FASTA":
                     st.write("**Translation (first 20 codons):**", translate_sequence(seq_str[:60]))
 
                     st.subheader("Codon Usage")
-                    codons = codon_usage(seq_str)
-                    st.json(dict(list(codons.items())[:10]))
-                    plot_codon_usage(codons, seq_id)
+                    if len(seq_str) >= 6:
+                        codons = codon_usage(seq_str)
+                        st.json(dict(list(codons.items())[:10]))
+                        plot_codon_usage(codons, seq_id)
+                    else:
+                        st.warning("Sequence too short for codon usage analysis.")
 
                     st.subheader("Start Codons (ATG)")
                     atgs = find_motif(seq_str, "ATG")
