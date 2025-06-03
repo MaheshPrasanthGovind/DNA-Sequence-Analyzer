@@ -107,6 +107,14 @@ st.markdown(
         border: 1px solid #555555 !important;
     }
 
+    /* Output blocks like st.code, st.text, etc. */
+    .stCodeBlock, .stText, .stMarkdown, .element-container {
+        background-color: #2b2b2b !important;
+        color: #FFFFFF !important;
+        border-radius: 5px;
+        padding: 0.5rem;
+    }
+
     /* Optional: Button styling */
     button {
         background-color: #444444 !important;
@@ -123,6 +131,7 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
+
 st.markdown("Upload a **FASTA** file or paste a DNA sequence manually to begin analysis.")
 
 input_mode = st.radio("Input method:", ["Manual", "Upload FASTA"])
